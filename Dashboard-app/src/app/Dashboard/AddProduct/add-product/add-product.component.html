@@ -1,0 +1,36 @@
+<div class="chart-box">
+  <div>
+    <h2 class="color-blue font-family">Add New Product</h2>
+  </div>
+  <div class="form-container">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <!-- Username Input -->
+      <label for="name">Name:</label>
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        placeholder="Enter Name"
+      />
+      <div
+        *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched"
+        class="help-block text-danger"
+      >
+        Name is required
+      </div>
+
+      <!-- Status Dropdown -->
+      <label for="status">Status:</label>
+      <select id="status" formControlName="status">
+        <option value="Approved">Approved</option>
+        <option value="Pending">Pending</option>
+        <option value="Rejected">Rejected</option>
+      </select>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-info">
+        <i class="fa-solid fa-circle-plus spacing"></i>Add
+      </button>
+    </form>
+  </div>
+</div>

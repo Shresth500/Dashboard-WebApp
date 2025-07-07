@@ -1,0 +1,17 @@
+<span class="success" matSnackBarLabel *ngIf="data.message !== ''">
+  {{ data.message }}
+</span>
+
+<span class="failure" matSnackBarLabel *ngIf="data.error !== ''">
+  {{ data.error }}
+</span>
+
+<span matSnackBarActions>
+  <button
+    mat-button
+    matSnackBarAction
+    (click)="snackBarRef.dismissWithAction()"
+  >
+    Close
+  </button>
+</span>

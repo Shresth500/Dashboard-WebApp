@@ -1,0 +1,53 @@
+.auth-container {
+  display: flex;
+  height: 100vh; // Full screen height
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-image {
+  flex: 7; // Take 70% of the screen
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.auth-image img {
+  width: 100%; // Adjust width to fill the container
+  height: 100%;
+  object-fit: cover; // Ensure it covers without distortion
+}
+
+.color-blue {
+  color: blue;
+}
+
+.font-size {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.auth-form {
+  flex: 3; // Take 30% of the screen
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .auth-container {
+    flex-direction: column;
+  }
+  .auth-image {
+    display: none; // Hide image on small screens
+  }
+}
+
+.block {
+  display: block;
+}

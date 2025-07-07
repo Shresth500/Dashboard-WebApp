@@ -1,0 +1,157 @@
+<div class="box">
+  <nav class="flex-container">
+    <h1 class="color-blue mr-3">Manage Products</h1>
+    <button class="btn btn-danger left-alignment" (click)="logout()">
+      <i class="fa-solid fa-right-from-bracket"></i>
+      Logout
+    </button>
+  </nav>
+  <div class="m-3 product-container">
+    <span class="flex-child-container">
+      <app-chart
+        [statusUpdate]="statusUpdate"
+        *ngIf="statusUpdate && statusUpdate.size > 0"
+      ></app-chart>
+      <app-add-product (addProduct)="postProduct($event)"></app-add-product>
+    </span>
+    <div class="table-wrapper">
+      <mat-card class="table-card">
+        <mat-card-title class="color-blue font-family"
+          >Product List</mat-card-title
+        >
+        <mat-card-content>
+          <table
+            mat-table
+            [dataSource]="dataSource"
+            class="mat-elevation-z8 full-width-table"
+          >
+            <!-- Product Name Column -->
+            <ng-container matColumnDef="Name">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <td mat-cell *matCellDef="let product">
+                <ng-container
+                  *ngIf="editingRow !== product.id; else editProductName"
+                >
+                  {{ product.name }}
+                </ng-container>
+                <ng-template #editProductName>
+                  <mat-form-field appearance="outline">
+                    <input matInput [(ngModel)]="product.name" />
+                  </mat-form-field>
+                </ng-template>
+              </td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status" class="d-flex">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let product">
+                <ng-container
+                  *ngIf="editingRow !== product.id; else editStatus"
+                >
+                  <span
+                    [ngClass]="{
+                      'status-approved': product.status === 'Approved',
+                      'status-pending': product.status === 'Pending',
+                      'status-rejected': product.status === 'Rejected'
+                    }"
+                  >
+                    <i
+                      class="fa-solid fa-circle-check"
+                      *ngIf="product.status === 'Approved'"
+                    ></i>
+                    <i
+                      class="fa-solid fa-circle-xmark"
+                      *ngIf="product.status === 'Rejected'"
+                    ></i>
+                    <i
+                      class="fa-solid fa-clock"
+                      *ngIf="product.status === 'Pending'"
+                    ></i>
+                    {{ product.status }}
+                  </span>
+                </ng-container>
+                <ng-template #editStatus>
+                  <mat-form-field appearance="outline">
+                    <mat-select [(ngModel)]="product.status">
+                      <mat-option
+                        *ngFor="
+                          let option of ['Approved', 'Pending', 'Rejected'];
+                          trackBy: trackByFn
+                        "
+                        [value]="option"
+                      >
+                        {{ option }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </ng-template>
+              </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let product">
+                <ng-container *ngIf="editingRow !== product.id">
+                  <button
+                    class="btn btn-info btn-sm"
+                    (click)="startEditing(product)"
+                  >
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    Edit
+                  </button>
+                  <button
+                    class="btn btn-danger btn-sm ms-2"
+                    (click)="deleteProduct(product)"
+                  >
+                    <i class="fa-solid fa-circle-xmark"></i>
+                    Delete
+                  </button>
+                </ng-container>
+                <ng-container *ngIf="editingRow === product.id">
+                  <button
+                    class="btn btn-success btn-sm"
+                    (click)="saveProduct(product)"
+                  >
+                    Save
+                  </button>
+                  <button
+                    class="btn btn-secondary btn-sm ms-2"
+                    (click)="cancelEditing()"
+                  >
+                    Cancel
+                  </button>
+                </ng-container>
+              </td>
+            </ng-container>
+
+            <!-- Table Header and Rows -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </mat-card-content>
+
+        <!-- Pagination -->
+        <mat-card-actions class="right-align">
+          <button (click)="goToFirstPage()" [disabled]="currentPage === 1">
+            <i class="fas fa-angles-left"></i>
+          </button>
+          <button (click)="previousPage()" [disabled]="currentPage === 1">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <span>Page {{ currentPage }} of {{ totalPages }}</span>
+          <button (click)="nextPage()" [disabled]="currentPage === totalPages">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          <button
+            (click)="goToLastPage()"
+            [disabled]="currentPage === totalPages"
+          >
+            <i class="fas fa-angles-right"></i>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

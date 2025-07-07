@@ -1,0 +1,104 @@
+<div class="form-container">
+  <ngb-alert *ngIf="alert" [type]="alert.type" (closed)="close()">
+    {{ alert.message }}
+  </ngb-alert>
+
+  <h2 class="color-blue">Register</h2>
+  <!-- <p class="color-blue" style="color: blue">
+    Product Catalog to store your desired Product
+  </p> -->
+  <form (ngSubmit)="f.form.valid && register(f)" #f="ngForm" novalidate>
+    <!-- Username Field -->
+
+    <!-- Email Field -->
+    <div class="form-group">
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        ngModel
+        #email="ngModel"
+        required
+        placeholder="Email"
+        required
+        email
+        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+      />
+      <div *ngIf="email.invalid && email.touched" class="text-danger">
+        <p *ngIf="email.errors?.['required']">Email is required.</p>
+        <p *ngIf="email.errors?.['email']">Invalid email format.</p>
+        <p *ngIf="email.errors?.['pattern']">Enter a valid email address.</p>
+      </div>
+
+      <div *ngIf="f.submitted && !email.valid" class="help-block text-danger">
+        Valid email is required
+      </div>
+    </div>
+
+    <!-- Password Field -->
+    <div class="form-group">
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        ngModel
+        #password="ngModel"
+        required
+        minlength="6"
+        placeholder="Password"
+        required
+        minlength="8"
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$"
+      />
+      <div *ngIf="password.invalid && password.touched" class="text-danger">
+        <p *ngIf="password.errors?.['required']">Password is required.</p>
+        <p *ngIf="password.errors?.['minlength']">
+          Password must be at least 8 characters long.
+        </p>
+        <p *ngIf="password.errors?.['pattern']">
+          Password must contain at least one uppercase letter, one lowercase
+          letter, one number, and one special character.
+        </p>
+      </div>
+      <div
+        *ngIf="f.submitted && password.value.contain"
+        class="help-block text-danger"
+      >
+        Passwords do not match
+      </div>
+      <div
+        *ngIf="f.submitted && !password.valid"
+        class="help-block text-danger"
+      >
+        Password must be at least 6 characters long
+      </div>
+    </div>
+
+    <!-- Confirm Password Field -->
+    <div class="form-group">
+      <input
+        type="password"
+        class="form-control"
+        id="confirmPassword"
+        name="confirmPassword"
+        ngModel
+        #confirmPassword="ngModel"
+        required
+        placeholder="Confirm Password"
+      />
+      <div
+        *ngIf="f.submitted && confirmPassword.value !== password.value"
+        class="help-block text-danger"
+      >
+        Passwords do not match
+      </div>
+    </div>
+    <!-- Register Button (Disabled if form is invalid) -->
+    <button type="submit" [disabled]="f.form.invalid">Register</button>
+  </form>
+  <p class="content">
+    Already have an account? <a routerLink="/auth/login">Login</a>
+  </p>
+</div>

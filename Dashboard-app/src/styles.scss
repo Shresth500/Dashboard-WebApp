@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import "bootstrap/scss/bootstrap";
+@import "@angular/material/prebuilt-themes/indigo-pink.css"; // (Default)
+
+html,
+body {
+  height: 100%;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.help-block {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.text-danger {
+  color: red;
+}

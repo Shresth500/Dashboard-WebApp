@@ -1,0 +1,62 @@
+<div class="form-container">
+  <ngb-alert *ngIf="alert" [type]="alert.type" (closed)="close()">
+    {{ alert.message }}
+  </ngb-alert>
+  <h2 class="color-blue">Login</h2>
+  <!-- <h2 class="color-blue" *ngIf="loginByEmail">Login By Email</h2> -->
+  <!-- <h2 class="color-blue" *ngIf="!loginByEmail">Login By UserName</h2> -->
+  <!-- <p class="color-blue" style="color: blue">
+    Product Catalog to store your desired Product
+  </p> -->
+  <form
+    name="form"
+    (ngSubmit)="f.form.valid && login(f)"
+    #f="ngForm"
+    novalidate
+    *ngIf="loginByEmail"
+  >
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      ngModel
+      #email="ngModel"
+      required
+      email
+      pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+    />
+    <div *ngIf="email.invalid && email.touched" class="text-danger">
+      <p *ngIf="email.errors?.['required']">Email is required.</p>
+      <p *ngIf="email.errors?.['pattern']">Enter a valid email address.</p>
+    </div>
+
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      name="password"
+      ngModel
+      #password="ngModel"
+      required
+      minlength="8"
+      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$"
+    />
+    <div *ngIf="password.invalid && password.touched" class="text-danger">
+      <p *ngIf="password.errors?.['required']" class="text-danger help-block">
+        Password is required.
+      </p>
+      <p *ngIf="password.errors?.['minlength']">
+        Password must be at least 8 characters long.
+      </p>
+      <p *ngIf="password.errors?.['pattern']">
+        Password must contain at least one uppercase letter, one lowercase
+        letter, one number, and one special character.
+      </p>
+    </div>
+    <button type="submit" class="btn btn-info">Login</button>
+    <p class="content">
+      Create an account? <a routerLink="/auth/register">Register</a>
+    </p>
+  </form>
+</div>
