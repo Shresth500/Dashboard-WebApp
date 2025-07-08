@@ -13,40 +13,31 @@
 ### Welcome Page
 
 1. Login Page
-   ![alt text](image-2.png)
+
 2. Registration Page
-   ![alt text](image-3.png)
+
 
 ### Login Page Validation
 
 1. Email Validation from Backend
-   ![alt text](image-4.png)
 2. Email Validation
-   ![alt text](image-5.png)
 3. Password Validation
-   ![alt text](image-6.png)
 
 ### REGISTRATION VALIDATION
 
 1. Password Validations
-   ![alt text](image-7.png)
 2. If Password and Confirm Password doesn’t match
-   ![alt text](image-8.png)
 3. Email validation
-   ![alt text](image-9.png)
 
 ### Authentication Work Flow
 
 1. First if user is not register, it can regist after succ registration is successful then it would redirect to Login Page, where it will check the login credentials, if the credentials are correct then it will redirect to dashboard page
 
 Registration Page
-![alt text](image-10.png)
 
 Login Page
-![alt text](image-11.png)
 
 Dashboard Page
-![alt text](image-12.png)
 
 1. In the Dashboard page we can add the product
 2. We can see the Status Distribution using dougnut chart
@@ -69,13 +60,9 @@ Dashboard Page
 4. Remember you can’t edit more fields at the same time
 5. If you are editing one field you can’t delete other fields until and unless you make changes or cancel the changes.
 
-![alt text](image-14.png)
-![alt text](image-15.png)
 
 6. After editing if you try to edit any other row, it will give an alert stating you can’t edit more than one row at the same time.
 
-![alt text](image-16.png)
 
 7. Same is the case for Delete, until an unless you haven’t save the edited row or cancelled the editing it will not allow you to perform any operation on any other row.
 
-![alt text](image-17.png)
